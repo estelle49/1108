@@ -58,7 +58,7 @@
     * 先要创建本地版本库
     * 再要创建远程版本库
     * 先要将本地仓库和远程仓库关联起来
-      * git remote add origin xxx
+      * git remote add origin https://github.com/estelle49/1108.git
         * 注意：关联仓库只能做一次，第二次就会失效报错
         * git remote remove origin 删除关联的仓库地址
     * 将本地仓库代码推送到远程仓库保管
