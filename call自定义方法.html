@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //自定义call方法
+    Function.prototype.mycall =function(target,...args){
+      //添加fn方法
+      target._proto_.fn = this
+      //改变this指向,传递参数, 定义返回值
+      const result = target._proto_.fn(...args)
+      // 删除多余的fn方法
+      delete target._proto_.fn
+      //返回值
+      return result;
+    }
+  </script>
+</body>
+</html>

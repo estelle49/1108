@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+      自定义call/apply/bind方法
+    */
+      /*call方法：未传参数时，this指向window，arguments为空
+     第一个参数：表示函数中this指向的对象
+     第二个参数，及后面的参数：表示arguments中的值
+     返回值为调用函数的返回值，调用函数无返回值时，该值为undefined
+*/
+      function fn() {
+        console.log(this);
+        console.log(arguments);
+        return 32889;
+      }
+      // 定义对象
+      const obj = {
+        name: "peihua~~"
+      };
+
+      //const re = fn.call(obj, 1, 2);
+      //console.log(re);
+
+      // 自定义myCall方法
+      // 如何让所有函数都能调用myCall方法？
+      //所有函数都是Function的实例，所有函数可以通过_proto_找到函数中的原型对象，从而调用原型中的方法
+      //所以可以将自定义的call方法定义在原型上,参数target为改变函数this的指向，args表示剩下的参数
+      Function.prototype.myCall = function(target=window,args){
+        //实现改变所有函数的this指向
+        //无fn(),所以给target对象，添加fn方法
+        //target.fn = this;  //当target.fn=fn时，使用的函数只能是fn
+        //target.fn(); //改变指向this指向target
+        //实现传参，改变this指向
+       // const result = target.fn(...args)
+       // delete target.fn;
+       // return result
+      target.__proto__.fn = this;  //将fn添加到隐形原型上，就不会打印出来
+
+      const result = target.fn(...args);
+
+      delete target.__proto__.fn;
+
+      return result;
+      };
+      
+
+      const result = fn.myCall(obj, [1, 2, 3]);
+      console.log(result);
+    </script>
+  </body>
+</html>

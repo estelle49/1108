@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" id="input">
+  <script>
+    const input = document.getElementById("input")
+    input.oninput=debounce(callback,time)
+    function callback(){
+      console.log("事件被触发了");
+    }
+    // 封装debounce函数
+    function debounce(fn,time){
+      let timer=null;
+      return function debounced(){
+        _self=this
+        arg=arguments
+        clearTimeout(timer)
+        let timer = setTimeout(function(){
+          fn.apply(_self,arg)
+        },time)
+      }
+    }
+    //封装节流函数
+    //时间戳方式
+    function throttle(fn,time){
+      let lastTime = 0;
+      return function throttled(){
+        const nowTime= Date.now()
+        if(nowTime-lastTime>time){
+          fn.apply(this,arguments)
+        }
+        lastTime=nowTime
+      }
+    }
+    //定时器方式
+    function throttle(fn,time){
+      let timer = null;
+      return function throttled(){
+        let _self=this
+        let arg=arguments
+        if(!timer){
+          timer=setTimeout(function(){
+            fn.apply(_self,arg)
+          },time)
+          timer = null;
+        }
+    
+      }
+    }
+  </script>
+</body>
+</html>
