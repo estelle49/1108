@@ -104,3 +104,17 @@
   * ssh方案
     * 仓库地址
     * 开发者需要提供给公司：一个ssh公钥
+
+
+
+# ssh配置
+
+1) 输入cd ~/.ssh，由于你的本地Git仓库和GitHub仓库之间的传输是通过SSH加密的，所以我们需要配置验证信息。
+
+l No such file or directory 表示第一次
+
+2) 创建SSH Key：ssh-keygen -t rsa -C ["xxx@xxx.com"](mailto:\)
+
+l 它会在~/下生成.ssh文件夹，进去打开id_rsa.pub文件复制里面全部的内容
+
+l 将其复制到你的GitHub里的SSH keys中
